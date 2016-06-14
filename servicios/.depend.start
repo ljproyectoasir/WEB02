@@ -1,0 +1,17 @@
+TARGETS = php5-fpm rsyslog uuidd motd bootlogs killprocs atd xinetd dbus irqbalance exim4 nginx single rsync anacron ssh cron ntp bluetooth rmnologin rc.local
+INTERACTIVE =
+atd: rsyslog
+xinetd: rsyslog
+dbus: rsyslog
+irqbalance: rsyslog
+exim4: rsyslog
+nginx: rsyslog
+single: killprocs motd bootlogs
+rsync: rsyslog
+anacron: rsyslog
+ssh: rsyslog
+cron: rsyslog
+ntp: rsyslog
+bluetooth: rsyslog dbus
+rmnologin: php5-fpm atd rsyslog xinetd uuidd bluetooth dbus irqbalance exim4 nginx motd bootlogs rsync anacron ssh cron ntp
+rc.local: php5-fpm atd rsyslog xinetd uuidd bluetooth dbus irqbalance exim4 nginx motd bootlogs rsync anacron ssh cron ntp

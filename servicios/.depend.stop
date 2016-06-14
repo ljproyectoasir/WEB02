@@ -1,0 +1,13 @@
+TARGETS = php5-fpm uuidd atd xinetd irqbalance exim4 nginx bluetooth urandom sendsigs rsyslog umountnfs.sh rpcbind nfs-common hwclock.sh networking umountfs umountroot live-tools halt reboot
+sendsigs: php5-fpm atd xinetd uuidd bluetooth irqbalance exim4 nginx
+rsyslog: atd xinetd bluetooth irqbalance exim4 nginx sendsigs
+umountnfs.sh: php5-fpm atd xinetd sendsigs uuidd bluetooth irqbalance exim4 nginx rsyslog
+rpcbind: umountnfs.sh
+nfs-common: umountnfs.sh
+hwclock.sh: atd nfs-common uuidd rsyslog
+networking: php5-fpm xinetd rpcbind exim4 nginx umountnfs.sh
+umountfs: urandom networking php5-fpm atd xinetd hwclock.sh rpcbind uuidd bluetooth irqbalance exim4 nginx umountnfs.sh
+umountroot: umountfs
+live-tools: umountroot
+halt: umountroot live-tools
+reboot: umountroot live-tools
